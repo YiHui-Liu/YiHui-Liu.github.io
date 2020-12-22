@@ -123,6 +123,13 @@
   </url>
   
   <url>
+    <loc>https://foolishfox.cn/tags/%E6%8C%87%E5%BC%95/</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://foolishfox.cn/tags/blog/</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -152,13 +159,6 @@
   
   <url>
     <loc>https://foolishfox.cn/tags/API/</loc>
-    <lastmod>2020-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/tags/%E6%8C%87%E5%BC%95/</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -195,6 +195,13 @@
   </url>
   
   <url>
+    <loc>https://foolishfox.cn/categories/%E5%85%AC%E5%91%8A/</loc>
+    <lastmod>2020-12-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://foolishfox.cn/categories/Hexo/</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>daily</changefreq>
@@ -203,13 +210,6 @@
   
   <url>
     <loc>https://foolishfox.cn/categories/Python/</loc>
-    <lastmod>2020-12-22</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/categories/%E5%85%AC%E5%91%8A/</loc>
     <lastmod>2020-12-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
