@@ -1,0 +1,16 @@
+# robots.txt generated at http://tool.chinaz.com/robots/ 
+User-agent: Sosospider
+Disallow: /
+User-agent: twiceler
+Disallow: /
+User-agent: Scrubby
+Disallow: /
+User-agent: Robozilla
+Disallow: /
+User-agent: Gigabot
+Disallow: /
+User-agent: *
+Disallow: /tags/
+Disallow: /categories/
+Disallow: /micro-blog
+Sitemap: https://foolishfox.cn/sitemap.xml
