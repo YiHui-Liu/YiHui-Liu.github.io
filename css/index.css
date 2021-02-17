@@ -521,7 +521,7 @@ kbd {
   border-radius: 4px;
   padding: 0.2rem 0.6rem;
 }
-@media (min-width: 991.98px) {
+@media (min-width: 191.98px) {
   [data-popover-pos='up']:hover::before {
     opacity: 1;
     -ms-filter: none;
@@ -801,13 +801,13 @@ kbd {
   display: none;
   padding: 0 0.5rem;
   line-height: 50px;
-  color: #333;
+  color: #2d2e30;
   cursor: pointer;
 }
 .header-nav-menu-item__link,
 .header-nav-submenu-item__link {
   display: block;
-  color: #333;
+  color: #2d2e30;
 }
 .header-nav-menu-item__icon,
 .header-nav-submenu-item__icon,
@@ -824,8 +824,8 @@ kbd {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 .header-nav-menu-item__link:hover {
-  color: #333;
-  background-color: #cec2b6;
+  color: #2d2e30;
+  background-color: #a09d9b;
 }
 .header-nav-submenu-item__link {
   padding: 0.75rem 0.5rem;
@@ -836,8 +836,8 @@ kbd {
   transition: color 0.2s ease, background-color 0.2s ease;
 }
 .header-nav-submenu-item__link:hover {
-  color: #333;
-  background-color: #cec2b6;
+  color: #2d2e30;
+  background-color: #a09d9b;
 }
 .header-nav-menu {
   display: none;
@@ -847,7 +847,7 @@ kbd {
 .header-nav-menu-item {
   float: left;
   position: relative;
-  margin: 0 1rem 0 0;
+  margin: 0 0.25rem 0 0;
   height: 50px;
   text-align: center;
   cursor: pointer;
@@ -897,7 +897,7 @@ kbd {
   padding: 0 0.5rem;
   height: 100%;
   line-height: 50px;
-  color: #333;
+  color: #2d2e30;
   -webkit-transition: color 0.2s ease;
   -moz-transition: color 0.2s ease;
   -o-transition: color 0.2s ease;
@@ -937,12 +937,12 @@ kbd {
   font-size: 4rem;
   font-weight: 700;
   line-height: 1;
-  color: #333;
+  color: #2d2e30;
 }
 .header-banner-info__subtitle {
   font-size: 1.2rem;
   font-weight: 400;
-  color: #333;
+  color: #2d2e30;
 }
 .header-banner-arrow {
   position: absolute;
@@ -2727,7 +2727,7 @@ a.fancybox {
     width: 1330px;
   }
 }
-@media (min-width: 991.98px) {
+@media (min-width: 191.98px) {
   .header-nav-menu {
     display: inline-block !important;
     opacity: 1 !important;
@@ -2738,7 +2738,7 @@ a.fancybox {
     border-radius: 3px;
   }
 }
-@media (max-width: 991.98px) {
+@media (max-width: 191.98px) {
   .header-inner {
     height: 17rem;
   }
@@ -2768,7 +2768,7 @@ a.fancybox {
     padding-right: 1.5rem;
     padding-left: 1.5rem;
     text-align: left;
-    color: #333;
+    color: #f4f5f5;
   }
   .header-nav-submenu {
     display: block;
@@ -2925,4 +2925,9 @@ a.fancybox {
   border-radius: 15px;
   border: none;
   margin: 5px auto;
+}
+@media (max-width: 191.98px) {
+  .header-nav-menu-item__link {
+    color: #2d2e30;
+  }
 }
