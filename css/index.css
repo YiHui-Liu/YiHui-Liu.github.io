@@ -521,7 +521,7 @@ kbd {
   border-radius: 4px;
   padding: 0.2rem 0.6rem;
 }
-@media (min-width: 191.98px) {
+@media (min-width: 991.98px) {
   [data-popover-pos='up']:hover::before {
     opacity: 1;
     -ms-filter: none;
@@ -2727,7 +2727,7 @@ a.fancybox {
     width: 1330px;
   }
 }
-@media (min-width: 191.98px) {
+@media (min-width: 991.98px) {
   .header-nav-menu {
     display: inline-block !important;
     opacity: 1 !important;
@@ -2738,7 +2738,7 @@ a.fancybox {
     border-radius: 3px;
   }
 }
-@media (max-width: 191.98px) {
+@media (max-width: 991.98px) {
   .header-inner {
     height: 17rem;
   }
@@ -2926,7 +2926,7 @@ a.fancybox {
   border: none;
   margin: 5px auto;
 }
-@media (max-width: 191.98px) {
+@media (max-width: 991.98px) {
   .header-nav-menu-item__link {
     color: #2d2e30;
   }
