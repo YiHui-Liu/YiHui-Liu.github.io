@@ -10,6 +10,7 @@ Disallow: /
 User-agent: Gigabot
 Disallow: /
 User-agent: *
+Disallow: 
 Disallow: /tags/
 Disallow: /categories/
 Disallow: /micro-blog
