@@ -2931,3 +2931,12 @@ a.fancybox {
     color: #2d2e30;
   }
 }
+input[type="checkbox"] {
+  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+}
+input[type="checkbox"]:checked + label::before {
+  content: '\2713';
+  background-color: #808080;
+}
