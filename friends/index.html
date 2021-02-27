@@ -399,9 +399,9 @@ if (Array.isArray(assistSearchList)) {
     placeholder: '您的评论将在审核后发布……',
     pageSize: '' || 10,
     lang: 'zh-CN,zh-TW,en' || 'zh-cn',
-    visitor: true,
+    visitor: location.hostname!=='localhost' && true ,
     avatar: 'wavatar',
-    path: window.location.pathname,
+    path: location.pathname,
     meta: guest_info
   });
 }
