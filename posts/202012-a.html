@@ -1,1 +1,432 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_small.jpg?v=2.5.0" type="image/png" sizes="16x16"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_big.jpg?v=2.5.0" type="image/png" sizes="32x32"><meta name="description" content="自己写了博客，一般总是希望被更多的人看到，而他人找到你的网站的最好方法就是通过搜索引擎。所以为了能够让你的网站被收录在搜索引擎中，需要向搜索引擎主动提交(当然，如果你是dl，大可不必如此麻烦)"><meta property="og:type" content="article"><meta property="og:title" content="利用python通过百度和必应API主动推送收录"><meta property="og:url" content="https://foolishfox.cn/posts/202012-a.html"><meta property="og:site_name" content="Fox Home"><meta property="og:description" content="自己写了博客，一般总是希望被更多的人看到，而他人找到你的网站的最好方法就是通过搜索引擎。所以为了能够让你的网站被收录在搜索引擎中，需要向搜索引擎主动提交(当然，如果你是dl，大可不必如此麻烦)"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://img.foolishfox.cn/images/2020/12/pushurl.png"><meta property="article:published_time" content="2020-12-15T06:19:32.000Z"><meta property="article:modified_time" content="2021-02-26T13:36:00.795Z"><meta property="article:author" content="liuyihui"><meta property="article:tag" content="收录"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://img.foolishfox.cn/images/2020/12/pushurl.png"><meta name="keywords" content="Blog,收录,python"><meta name="description" content="blog of foolish fox | FF的博客"><title>利用python通过百度和必应API主动推送收录 | Fox Home</title><link ref="canonical" href="https://foolishfox.cn/posts/202012-a.html"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.5.0"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?32e5cd9917162f58a71a8371a8421dee",e.async=!0;var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><script>var Stun=window.Stun||{},CONFIG={root:"/",algolia:void 0,assistSearch:void 0,fontIcon:{prompt:{success:"fas fa-check-circle",info:"fas fa-arrow-circle-right",warning:"fas fa-exclamation-circle",error:"fas fa-times-circle"},copyBtn:"fas fa-copy"},sidebar:{offsetTop:"20px",tocMaxDepth:4},header:{enable:!0,showOnPost:!1,scrollDownIcon:!0},postWidget:{endText:!0},nightMode:{enable:!0},back2top:{enable:!0},codeblock:{style:"default",highlight:"ocean",wordWrap:!1},reward:!0,fancybox:!1,zoomImage:{gapAside:"20px"},galleryWaterfall:void 0,lazyload:!0,pjax:void 0,externalLink:{icon:{enable:!0,name:"fas fa-external-link-alt"}},shortcuts:{switchPost:!0},prompt:{copyButton:"复制",copySuccess:"复制成功",copyError:"复制失败"},sourcePath:{js:"js",css:"css",images:"images"}};window.CONFIG=CONFIG</script><meta name="generator" content="Hexo 5.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return!1"><span class="header-nav-menu-item__icon"><i class="fas fa-feather-alt"></i></span><span class="header-nav-menu-item__text">文章</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/archives/"><span class="header-nav-submenu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-submenu-item__text">归档</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/categories/"><span class="header-nav-submenu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-submenu-item__text">分类</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/tags/"><span class="header-nav-submenu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-submenu-item__text">标签</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return!1"><span class="header-nav-menu-item__icon"><i class="far fa-heart"></i></span><span class="header-nav-menu-item__text">关于</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/about/"><span class="header-nav-submenu-item__icon"><i class="fas fa-address-card"></i></span><span class="header-nav-submenu-item__text">作者</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/micro-blog/"><span class="header-nav-submenu-item__icon"><i class="fab fa-microblog"></i></span><span class="header-nav-submenu-item__text">动态</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/movies/"><span class="header-nav-submenu-item__icon"><i class="fas fa-film"></i></span><span class="header-nav-submenu-item__text">电影</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/books/"><span class="header-nav-submenu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-submenu-item__text">书籍</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-male"></i></span><span class="header-nav-menu-item__text">友人</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return!1"><span class="header-nav-menu-item__icon"><i class="fas fa-flask"></i></span><span class="header-nav-menu-item__text">实验室</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://run.foolishfox.cn/"><span class="header-nav-submenu-item__icon"><i class="fas fa-running"></i></span><span class="header-nav-submenu-item__text">跑步</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://api.foolishfox.cn/waline/ui"><span class="header-nav-submenu-item__icon"><i class="far fa-comments"></i></span><span class="header-nav-submenu-item__text">评论</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://api.foolishfox.cn/travel/"><span class="header-nav-submenu-item__icon"><i class="fas fa-plane-departure"></i></span><span class="header-nav-submenu-item__text">旅行</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://api.foolishfox.cn/slides/"><span class="header-nav-submenu-item__icon"><i class="fab fa-slideshare"></i></span><span class="header-nav-submenu-item__text">幻灯片</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return!1"><span class="header-nav-menu-item__icon"><i class="fas fa-shield-alt"></i></span><span class="header-nav-menu-item__text">监控</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://status.foolishfox.cn/"><span class="header-nav-submenu-item__icon"><i class="fas fa-sitemap"></i></span><span class="header-nav-submenu-item__text">服务</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://node.foolishfox.cn/"><span class="header-nav-submenu-item__icon"><i class="fas fa-server"></i></span><span class="header-nav-submenu-item__text">节点</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" target="_blank" rel="noopener" href="https://travellings.now.sh/"><span class="header-nav-menu-item__icon"><i class="fas fa-subway"></i></span><span class="header-nav-menu-item__text">开往</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">利用python通过百度和必应API主动推送收录</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-12-15</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-02-26</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">989</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/posts/202012-a.html" data-flag-title="利用python通过百度和必应API主动推送收录"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span></div></header><div class="post-body"><p>  自己写了博客，一般总是希望被更多的人看到，而他人找到你的网站的最好方法就是通过搜索引擎。所以为了能够让你的网站被收录在搜索引擎中，需要向搜索引擎主动提交(当然，如果你是dl，大可不必如此麻烦)</p><a id="more"></a><p>  如果你是通过<code>Hexo</code>建立的网站，有很多的插件可以提供你使用，例如<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://github.com/cjh0613/hexo-submit-urls-to-search-engine">hexo-submit-urls-to-search-engine</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，配置可以看插件的<span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html">文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，除了这种方法之外，还可以自己用<code>Python</code>写一个自动提交的程序。</p><h2 id="流程"><a href="#流程" class="heading-link"><i class="fas fa-link"></i></a>流程</h2><p><img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="https://img.foolishfox.cn/images/2020/12/pushurl.png" alt="流程"><br>  目前国内主要的搜索引擎就是百度，必应和谷歌，<s>如果需要主动推送谷歌的话，需要会科学上网，再加上个人觉得没什么必要，所以只添加了前两个的push</s><br>  2020.12.19:谷歌可以自动抓取，没必要主动推送</p><h2 id="依赖"><a href="#依赖" class="heading-link"><i class="fas fa-link"></i></a>依赖</h2><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re, os, urllib, requests</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> xml.dom.minidom</span><br><span class="line"><span class="keyword">from</span> xml.dom.minidom <span class="keyword">import</span> parse</span><br></pre></td></tr></table></div></figure><p>  一般情况下，只要安装<code>BeautifulSoup</code>就好了</p><h2 id="收录情况"><a href="#收录情况" class="heading-link"><i class="fas fa-link"></i></a>收录情况</h2><p>  在搜索引擎中输入<code>site:example.com</code>就可以查看你的网站的收录情况，这里使用百度来获得网站的收录情况：</p><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data      = requests.get(<span class="string">&#x27;http://www.baidu.com/s?wd=site:&#x27;</span>+url)</span><br><span class="line">content   = data.content.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">soup      = BeautifulSoup(content,<span class="string">&#x27;lxml&#x27;</span>)</span><br><span class="line">link_list = soup.find_all(<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></div></figure><p>  这部分实现的是查询收录情况，并且获取页面中所有的链接</p><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">site_list = []</span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> link_list :</span><br><span class="line">    url = link.get(<span class="string">&#x27;href&#x27;</span>)</span><br><span class="line">    rul = re.<span class="built_in">compile</span>(<span class="string">r&#x27;http://www.baidu.com/link\?url=+.+&#x27;</span>)</span><br><span class="line">    url = rul.findall(url)</span><br></pre></td></tr></table></div></figure><p>  这部分是将无关的链接全部排除；百度的搜索结果都是以<code>http://www.baidu.com/link/?url=</code>进行替换的，而我们要获得的是真实网址，所以下一步要通过访问这个链接，获取真实指向的网址：</p><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    response = request.urlopen(url[<span class="number">0</span>])</span><br><span class="line">    realurl  = response.geturl()</span><br><span class="line">    <span class="keyword">if</span> realurl!=<span class="string">&#x27;&#x27;</span> :</span><br><span class="line">        site_list.append(realurl)</span><br><span class="line"><span class="keyword">except</span> request.HTTPError <span class="keyword">as</span> e :</span><br><span class="line">    print(e.code, e.reason)</span><br><span class="line"><span class="keyword">except</span> urllib.error.URLError <span class="keyword">as</span> e :</span><br><span class="line">    data = requests.get(url[<span class="number">0</span>])</span><br></pre></td></tr></table></div></figure><p>  <code>urllib.error.URLError</code>是为了防止有时候DNS解析不到某些域名的网址，导致程序直接退出</p><h2 id="站点链接"><a href="#站点链接" class="heading-link"><i class="fas fa-link"></i></a>站点链接</h2><p>  可以通过很多手段获得站点地图。以我的网站为例，使用<code>hexo-generator-sitemap</code>直接获得了<code>sitemap.xml</code>文件</p><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DOMTree   = xml.dom.minidom.parse(path)</span><br><span class="line">sizemap   = DOMTree.getElementsByTagName(<span class="string">&#x27;loc&#x27;</span>)</span><br><span class="line">site_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(sizemap), <span class="number">1</span>):</span><br><span class="line">    url = sizemap[i].firstChild.data</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;tags&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> url <span class="keyword">and</span> <span class="string">&#x27;categories&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> url :</span><br><span class="line">        site_list.append(url)</span><br><span class="line"><span class="keyword">return</span> site_list</span><br></pre></td></tr></table></div></figure><h2 id="百度提交"><a href="#百度提交" class="heading-link"><i class="fas fa-link"></i></a>百度提交</h2><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">s_url = <span class="string">&#x27;http://data.zz.baidu.com/urls?site=https://foolishfox.cn&amp;token=&#x27;</span>+os.environ[<span class="string">&#x27;baidu_token&#x27;</span>]</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;content-type&#x27;</span> : <span class="string">&#x27;text/plain&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>   : <span class="string">&#x27;curl/7.12.1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>         : <span class="string">&#x27;data.zz.baidu.com&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">url_string = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> url_list :</span><br><span class="line">    url_string += link+<span class="string">&#x27;\n&#x27;</span></span><br><span class="line">response = requests.request(<span class="string">&#x27;POST&#x27;</span>, url=s_url, data=url_string, headers=headers)</span><br><span class="line"><span class="keyword">return</span> response.text</span><br></pre></td></tr></table></div></figure><p>  百度API的token我已经提前设置在了环境变量中，可以避免对外公开。需要注意的是，<strong>百度API的格式要求是字符串</strong>，所以我将<code>list</code>拼接成了<code>string</code>。</p><h2 id="必应提交"><a href="#必应提交" class="heading-link"><i class="fas fa-link"></i></a>必应提交</h2><figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">s_url = <span class="string">&#x27;https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=&#x27;</span>+os.environ[<span class="string">&#x27;bing_token&#x27;</span>]</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;content-type&#x27;</span> : <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>   : <span class="string">&#x27;curl/7.12.1&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">url_json = &#123;</span><br><span class="line">    <span class="string">&#x27;siteUrl&#x27;</span>: <span class="string">&#x27;https://foolishfox.cn&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;urlList&#x27;</span>: []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> url_list :</span><br><span class="line">    url_json[<span class="string">&#x27;url&#x27;</span>].append(link)</span><br><span class="line">response = requests.request(<span class="string">&#x27;POST&#x27;</span>, url=s_url, json=url_json, headers=headers)</span><br><span class="line"><span class="keyword">return</span> response.text</span><br></pre></td></tr></table></div></figure><p>  必应可以采用<code>xml</code>和<code>json</code>两种格式提交，我用的是后者。如果提交单个链接，应该将<code>s_url</code>修改为<code>https://ssl.bing.com/webmaster/api.svc/json/SubmitUrl?apikey=</code>，将<code>json</code>中的<code>urlList</code>修改为<code>url</code></p><h2 id="自动提交"><a href="#自动提交" class="heading-link"><i class="fas fa-link"></i></a>自动提交</h2><p>  最简单的方式就是通过<code>crontab</code>了，如果使用<code>Hexo</code>，还可以用<code>node.js</code>监听<code>hexo</code>事件，实现提交：</p><figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	hexo.on(&#39;deployAfter&#39;, function() &#123;</span><br><span class="line">		run();</span><br><span class="line">	&#125;);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">	console.log(&quot;Error: &quot; + e.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure><h2 id="更新"><a href="#更新" class="heading-link"><i class="fas fa-link"></i></a>更新</h2><ul><li>2020.12.19: 修改代码中链接、流程和部分单词拼写错误</li></ul><h2 id="源码"><a href="#源码" class="heading-link"><i class="fas fa-link"></i></a>源码</h2><ul><li><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://fox-file.oss-cn-beijing.aliyuncs.com/pushurl.py">pushurl.py</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li></ul><h2 id="参考资料"><a href="#参考资料" class="heading-link"><i class="fas fa-link"></i></a>参考资料</h2><ul><li><span class="exturl"><a class="exturl__link" target="_blank" rel="noopener" href="https://cjh0613.com/20200602pythonBingUrlPush.html">python主动推送链接至必应Bing平台</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li></ul></div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://foolishfox.cn">liuyihui</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://foolishfox.cn/posts/202012-a.html">https://foolishfox.cn/posts/202012-a.html</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://foolishfox.cn/tags/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="post-share"><div class="social-share" data-sites="qzone, qq, weibo, wechat, douban">Share to:</div></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="https://img.foolishfox.cn/images/static/alipay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="https://img.foolishfox.cn/images/static/wechat.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/202012-heog.html"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">从WordPress搬迁——使用Hexo搭建博客</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/202009-a.html"><span class="paginator-prev__text">星座与节气</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="waline-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96"><span class="toc-number">2.</span> <span class="toc-text">依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E5%BD%95%E6%83%85%E5%86%B5"><span class="toc-number">3.</span> <span class="toc-text">收录情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E9%93%BE%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">站点链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BE%E5%BA%A6%E6%8F%90%E4%BA%A4"><span class="toc-number">5.</span> <span class="toc-text">百度提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%85%E5%BA%94%E6%8F%90%E4%BA%A4"><span class="toc-number">6.</span> <span class="toc-text">必应提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4"><span class="toc-number">7.</span> <span class="toc-text">自动提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-number">8.</span> <span class="toc-text">更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number">9.</span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">10.</span> <span class="toc-text">参考资料</span></a></li></ol></section><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://img.foolishfox.cn/images/static/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Learing and Coding!</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/YiHui-Liu" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/439545632" target="_blank" rel="noopener" data-popover="BiliBili" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">B</span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/qing-jiu-44-72-51" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/7190631987" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="mailto:fox@foolishfox.cn" target="_blank" rel="noopener" data-popover="social.Email" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-envelope-open-text"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>liuyihui</span><span class="footer__devider">|</span><span>京ICP备2020033890号</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.2.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.5.0</span></div><div>本站由 <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">又拍云</a> 提供加速服务 |<script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=1278748401&web_id=1278748401"></script></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script><script src="https://cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zindex="-1"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><script>function initSearch(){var c=!0,e="search.json";e?/json$/i.test(e)&&(c=!1):e="search.xml";e="/"+e;$.ajax({url:e,dataType:c?"xml":"json",async:!0,success:function(e){function t(){var e=o.val().toLowerCase().trim(),h=e.split(/[\s]+/),d=[];1<h.length&&h.push(e),0<e.length&&n.forEach(function(e){var t=!1,n=e.title&&e.title.trim()||"[ 文章无标题 ]",o=n&&n.toLowerCase(),i=e.content&&e.content.replace(/<[^>]+>/g,""),c=i&&i.toLowerCase(),s=e.url&&decodeURI(e.url).replace(/\/{2,}/g,"/"),a=[],r=[];h.forEach(function(e){function t(t,e,n,o){if(!t||!e)return[];var i,c=0,s=[];for(n||(t=t.toLowerCase(),e=e.toLowerCase());-1!==(i=e.indexOf(t,c));){var r=!1;a.forEach(function(e){e.index===i&&e.word.length<t.length&&(e.word=t,r=!0)}),c=i+t.length,r||s.push({index:i,word:t,weight:o})}return s}a=a.concat(t(e,o,!1,f)),r=r.concat(t(e,c,!1,p))});var l=a.length,e=r.length;function u(n,e,t,o){if(n&&e&&e.length){var i="",c=t,o=o;return e.forEach(function(e){var t;e.index<c||(t=e.index+e.word.length,i+=n.slice(c,e.index),i+="<b>"+n.slice(e.index,t)+"</b>",c=t)}),i+=n.slice(c,o)}}(t=0<l||0<e?!0:t)&&([a,r].forEach(function(e){e.sort(function(e,t){return e.index-t.index})}),l={},e=a.length*f+r.length*p,t=u(n,a,0,n.length)||n,i=0<r.length?(n=r[0].index,u(i,r,20<n?n-20:0,n+180)):i.slice(0,200),l.title=t,l.content=i,l.url=s,l.weight=e,d.push(l))});var t="";d.length?(d.sort(function(e,t){return t.weight-e.weight}),t+="<ul>",d.forEach(function(e){t+='<li><a class="search-results-title" href="'+e.url+'">',t+=e.title,t+='</a><div class="search-results-content">',t+=e.content,t+="</div></li>"}),t+="</ul>"):t+='<div class="search-results-none"><i class="far fa-meh"></i></div>',i.html(t)}var n=c?$("entry",e).map(function(){return{title:$("title",this).text(),content:$("content",this).text(),url:$("url",this).text()}}).get():e,o=$(".search-input input"),i=$(".search-results"),f=100,p=1;o.on("input",t),o.on("keyup",function(e){e.keyCode===Stun.utils.codeToKeyCode("Enter")&&t()})}})}function closeSearch(){$("body").css({overflow:"auto"}),$(".search-popup").css({display:"none"}),$(".search-mask").css({display:"none"})}function safeOpenUrl(e){var t=window.open();t.opener=null,t.location=e}function extSearch(e){var t=window.location.host,n=$(".search-input input").val().toLowerCase().trim();n?safeOpenUrl({google:"https://www.google.com/search?q=",bing:"https://cn.bing.com/search?q=",baidu:"https://www.baidu.com/s?ie=UTF-8&wd="}[e]+n+" site:"+t):Stun.utils.popAlert("warning","请输入字符")}window.addEventListener("DOMContentLoaded",function(){Stun.utils.pjaxReloadLocalSearch=function(){$(".header-nav-search").on("click",function(e){e.stopPropagation(),$("body").css("overflow","hidden"),$(".search-popup").velocity("stop").velocity("transition.expandIn",{duration:300,complete:function(){$(".search-popup input").focus()}}),$(".search-mask").velocity("stop").velocity("transition.fadeIn",{duration:300}),initSearch()}),$(".search-mask, .search-close").on("click",function(){closeSearch()}),$(document).on("keydown",function(e){e.keyCode===Stun.utils.codeToKeyCode("Escape")&&closeSearch()})},Stun.utils.pjaxReloadLocalSearch()},!1);var assistSearchList=window.CONFIG.assistSearch;Array.isArray(assistSearchList)&&assistSearchList.forEach(function(e){document.querySelector(".search-btns-item--"+e).addEventListener("click",function(){extSearch(e)},!1)})</script><script src="https://fox-file.oss-cn-beijing.aliyuncs.com/Waline.min.js"></script><script>function loadWaline(){var n=["nick","mail","link"],a="nick,mail,link".split(",").filter(function(a){return-1<n.indexOf(a)});new Waline({el:"#waline-container",serverURL:"https://api.foolishfox.cn/waline",placeholder:"您的评论将在审核后发布……",pageSize:10,lang:"zh-CN,zh-TW,en",visitor:"localhost"!==location.hostname&&!0,avatar:"wavatar",path:location.pathname,meta:a})}window.addEventListener("DOMContentLoaded",loadWaline,!1)</script><script src="/js/utils.js?v=2.5.0"></script><script src="/js/stun-boot.js?v=2.5.0"></script><script src="/js/scroll.js?v=2.5.0"></script><script src="/js/header.js?v=2.5.0"></script><script src="/js/sidebar.js?v=2.5.0"></script><script type="application/json" src="/search.json"></script></body></html>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_small.jpg?v=2.5.0" type="image/png" sizes="16x16"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_big.jpg?v=2.5.0" type="image/png" sizes="32x32"><meta name="description" content="自己写了博客，一般总是希望被更多的人看到，而他人找到你的网站的最好方法就是通过搜索引擎。所以为了能够让你的网站被收录在搜索引擎中，需要向搜索引擎主动提交(当然，如果你是dl，大可不必如此麻烦)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用python通过百度和必应API主动推送收录">
+<meta property="og:url" content="https://foolishfox.cn/posts/202012-a.html">
+<meta property="og:site_name" content="Fox Home">
+<meta property="og:description" content="自己写了博客，一般总是希望被更多的人看到，而他人找到你的网站的最好方法就是通过搜索引擎。所以为了能够让你的网站被收录在搜索引擎中，需要向搜索引擎主动提交(当然，如果你是dl，大可不必如此麻烦)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.foolishfox.cn/images/2020/12/pushurl.png">
+<meta property="article:published_time" content="2020-12-15T06:19:32.000Z">
+<meta property="article:modified_time" content="2021-02-26T13:36:00.795Z">
+<meta property="article:author" content="liuyihui">
+<meta property="article:tag" content="收录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.foolishfox.cn/images/2020/12/pushurl.png"><meta name="keywords" content="Blog,收录,python"><meta name="description" content="blog of foolish fox | FF的博客"><title>利用python通过百度和必应API主动推送收录 | Fox Home</title><link ref="canonical" href="https://foolishfox.cn/posts/202012-a.html"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.5.0"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement('script');
+  hm.src = 'https://hm.baidu.com/hm.js?32e5cd9917162f58a71a8371a8421dee';
+  hm.async = true;
+
+  if (false) {
+    hm.setAttribute('data-pjax', '');
+  }
+  var s = document.getElementsByTagName('script')[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":4},
+  header: {"enable":true,"showOnPost":false,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"ocean","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: {"switchPost":true},
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.2.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner header-inner--height header-inner--bgcolor"><nav class="header-nav header-nav--sticky"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-feather-alt"></i></span><span class="header-nav-menu-item__text">文章</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/archives/"><span class="header-nav-submenu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-submenu-item__text">归档</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/categories/"><span class="header-nav-submenu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-submenu-item__text">分类</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/tags/"><span class="header-nav-submenu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-submenu-item__text">标签</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="far fa-heart"></i></span><span class="header-nav-menu-item__text">关于</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/about/"><span class="header-nav-submenu-item__icon"><i class="fas fa-address-card"></i></span><span class="header-nav-submenu-item__text">作者</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/micro-blog/"><span class="header-nav-submenu-item__icon"><i class="fab fa-microblog"></i></span><span class="header-nav-submenu-item__text">动态</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/movies/"><span class="header-nav-submenu-item__icon"><i class="fas fa-film"></i></span><span class="header-nav-submenu-item__text">电影</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/books/"><span class="header-nav-submenu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-submenu-item__text">书籍</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/friends/"><span class="header-nav-menu-item__icon"><i class="fas fa-male"></i></span><span class="header-nav-menu-item__text">友人</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-flask"></i></span><span class="header-nav-menu-item__text">实验室</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://run.foolishfox.cn/"><span class="header-nav-submenu-item__icon"><i class="fas fa-running"></i></span><span class="header-nav-submenu-item__text">跑步</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://api.foolishfox.cn/waline/ui"><span class="header-nav-submenu-item__icon"><i class="far fa-comments"></i></span><span class="header-nav-submenu-item__text">评论</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://api.foolishfox.cn/travel/"><span class="header-nav-submenu-item__icon"><i class="fas fa-plane-departure"></i></span><span class="header-nav-submenu-item__text">旅行</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://api.foolishfox.cn/slides/"><span class="header-nav-submenu-item__icon"><i class="fab fa-slideshare"></i></span><span class="header-nav-submenu-item__text">幻灯片</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-shield-alt"></i></span><span class="header-nav-menu-item__text">监控</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://status.foolishfox.cn/"><span class="header-nav-submenu-item__icon"><i class="fas fa-sitemap"></i></span><span class="header-nav-submenu-item__text">服务</span></a></div><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" target="_blank" rel="noopener" href="https://node.foolishfox.cn/"><span class="header-nav-submenu-item__icon"><i class="fas fa-server"></i></span><span class="header-nav-submenu-item__text">节点</span></a></div></div></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" target="_blank" rel="noopener" href="https://travellings.now.sh/"><span class="header-nav-menu-item__icon"><i class="fas fa-subway"></i></span><span class="header-nav-menu-item__text">开往</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">利用python通过百度和必应API主动推送收录</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2020-12-15</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-02-26</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">989</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/posts/202012-a.html" data-flag-title="利用python通过百度和必应API主动推送收录"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span></div></header><div class="post-body"><p>  自己写了博客，一般总是希望被更多的人看到，而他人找到你的网站的最好方法就是通过搜索引擎。所以为了能够让你的网站被收录在搜索引擎中，需要向搜索引擎主动提交(当然，如果你是dl，大可不必如此麻烦)</p>
+<a id="more"></a>
+<p>  如果你是通过<code>Hexo</code>建立的网站，有很多的插件可以提供你使用，例如<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/cjh0613/hexo-submit-urls-to-search-engine" >hexo-submit-urls-to-search-engine</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，配置可以看插件的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html" >文档</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>，除了这种方法之外，还可以自己用<code>Python</code>写一个自动提交的程序。</p>
+
+        <h2 id="流程"   >
+          <a href="#流程" class="heading-link"><i class="fas fa-link"></i></a>流程</h2>
+      
+<p>
+        <img   class="lazyload lazyload-gif"
+          src="/images/loading.svg" data-src="https://img.foolishfox.cn/images/2020/12/pushurl.png"  alt="流程" />
+      <br />
+  目前国内主要的搜索引擎就是百度，必应和谷歌，<s>如果需要主动推送谷歌的话，需要会科学上网，再加上个人觉得没什么必要，所以只添加了前两个的push</s><br />
+  2020.12.19:谷歌可以自动抓取，没必要主动推送</p>
+
+        <h2 id="依赖"   >
+          <a href="#依赖" class="heading-link"><i class="fas fa-link"></i></a>依赖</h2>
+      
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re, os, urllib, requests</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> xml.dom.minidom</span><br><span class="line"><span class="keyword">from</span> xml.dom.minidom <span class="keyword">import</span> parse</span><br></pre></td></tr></table></div></figure>
+<p>  一般情况下，只要安装<code>BeautifulSoup</code>就好了</p>
+
+        <h2 id="收录情况"   >
+          <a href="#收录情况" class="heading-link"><i class="fas fa-link"></i></a>收录情况</h2>
+      
+<p>  在搜索引擎中输入<code>site:example.com</code>就可以查看你的网站的收录情况，这里使用百度来获得网站的收录情况：</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data      = requests.get(<span class="string">&#x27;http://www.baidu.com/s?wd=site:&#x27;</span>+url)</span><br><span class="line">content   = data.content.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">soup      = BeautifulSoup(content,<span class="string">&#x27;lxml&#x27;</span>)</span><br><span class="line">link_list = soup.find_all(<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></div></figure>
+<p>  这部分实现的是查询收录情况，并且获取页面中所有的链接</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">site_list = []</span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> link_list :</span><br><span class="line">    url = link.get(<span class="string">&#x27;href&#x27;</span>)</span><br><span class="line">    rul = re.<span class="built_in">compile</span>(<span class="string">r&#x27;http://www.baidu.com/link\?url=+.+&#x27;</span>)</span><br><span class="line">    url = rul.findall(url)</span><br></pre></td></tr></table></div></figure>
+<p>  这部分是将无关的链接全部排除；百度的搜索结果都是以<code>http://www.baidu.com/link/?url=</code>进行替换的，而我们要获得的是真实网址，所以下一步要通过访问这个链接，获取真实指向的网址：</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    response = request.urlopen(url[<span class="number">0</span>])</span><br><span class="line">    realurl  = response.geturl()</span><br><span class="line">    <span class="keyword">if</span> realurl!=<span class="string">&#x27;&#x27;</span> :</span><br><span class="line">        site_list.append(realurl)</span><br><span class="line"><span class="keyword">except</span> request.HTTPError <span class="keyword">as</span> e :</span><br><span class="line">    print(e.code, e.reason)</span><br><span class="line"><span class="keyword">except</span> urllib.error.URLError <span class="keyword">as</span> e :</span><br><span class="line">    data = requests.get(url[<span class="number">0</span>])</span><br></pre></td></tr></table></div></figure>
+<p>  <code>urllib.error.URLError</code>是为了防止有时候DNS解析不到某些域名的网址，导致程序直接退出</p>
+
+        <h2 id="站点链接"   >
+          <a href="#站点链接" class="heading-link"><i class="fas fa-link"></i></a>站点链接</h2>
+      
+<p>  可以通过很多手段获得站点地图。以我的网站为例，使用<code>hexo-generator-sitemap</code>直接获得了<code>sitemap.xml</code>文件</p>
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DOMTree   = xml.dom.minidom.parse(path)</span><br><span class="line">sizemap   = DOMTree.getElementsByTagName(<span class="string">&#x27;loc&#x27;</span>)</span><br><span class="line">site_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(sizemap), <span class="number">1</span>):</span><br><span class="line">    url = sizemap[i].firstChild.data</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;tags&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> url <span class="keyword">and</span> <span class="string">&#x27;categories&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> url :</span><br><span class="line">        site_list.append(url)</span><br><span class="line"><span class="keyword">return</span> site_list</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="百度提交"   >
+          <a href="#百度提交" class="heading-link"><i class="fas fa-link"></i></a>百度提交</h2>
+      
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">s_url = <span class="string">&#x27;http://data.zz.baidu.com/urls?site=https://foolishfox.cn&amp;token=&#x27;</span>+os.environ[<span class="string">&#x27;baidu_token&#x27;</span>]</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;content-type&#x27;</span> : <span class="string">&#x27;text/plain&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>   : <span class="string">&#x27;curl/7.12.1&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Host&#x27;</span>         : <span class="string">&#x27;data.zz.baidu.com&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">url_string = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> url_list :</span><br><span class="line">    url_string += link+<span class="string">&#x27;\n&#x27;</span></span><br><span class="line">response = requests.request(<span class="string">&#x27;POST&#x27;</span>, url=s_url, data=url_string, headers=headers)</span><br><span class="line"><span class="keyword">return</span> response.text</span><br></pre></td></tr></table></div></figure>
+<p>  百度API的token我已经提前设置在了环境变量中，可以避免对外公开。需要注意的是，<strong>百度API的格式要求是字符串</strong>，所以我将<code>list</code>拼接成了<code>string</code>。</p>
+
+        <h2 id="必应提交"   >
+          <a href="#必应提交" class="heading-link"><i class="fas fa-link"></i></a>必应提交</h2>
+      
+<figure class="highlight python"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">s_url = <span class="string">&#x27;https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey=&#x27;</span>+os.environ[<span class="string">&#x27;bing_token&#x27;</span>]</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;content-type&#x27;</span> : <span class="string">&#x27;application/json&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>   : <span class="string">&#x27;curl/7.12.1&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">url_json = &#123;</span><br><span class="line">    <span class="string">&#x27;siteUrl&#x27;</span>: <span class="string">&#x27;https://foolishfox.cn&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;urlList&#x27;</span>: []</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> url_list :</span><br><span class="line">    url_json[<span class="string">&#x27;url&#x27;</span>].append(link)</span><br><span class="line">response = requests.request(<span class="string">&#x27;POST&#x27;</span>, url=s_url, json=url_json, headers=headers)</span><br><span class="line"><span class="keyword">return</span> response.text</span><br></pre></td></tr></table></div></figure>
+<p>  必应可以采用<code>xml</code>和<code>json</code>两种格式提交，我用的是后者。如果提交单个链接，应该将<code>s_url</code>修改为<code>https://ssl.bing.com/webmaster/api.svc/json/SubmitUrl?apikey=</code>，将<code>json</code>中的<code>urlList</code>修改为<code>url</code></p>
+
+        <h2 id="自动提交"   >
+          <a href="#自动提交" class="heading-link"><i class="fas fa-link"></i></a>自动提交</h2>
+      
+<p>  最简单的方式就是通过<code>crontab</code>了，如果使用<code>Hexo</code>，还可以用<code>node.js</code>监听<code>hexo</code>事件，实现提交：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	hexo.on(&#39;deployAfter&#39;, function() &#123;</span><br><span class="line">		run();</span><br><span class="line">	&#125;);</span><br><span class="line">&#125; catch (e) &#123;</span><br><span class="line">	console.log(&quot;Error: &quot; + e.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="更新"   >
+          <a href="#更新" class="heading-link"><i class="fas fa-link"></i></a>更新</h2>
+      
+<ul>
+<li>2020.12.19: 修改代码中链接、流程和部分单词拼写错误</li>
+</ul>
+
+        <h2 id="源码"   >
+          <a href="#源码" class="heading-link"><i class="fas fa-link"></i></a>源码</h2>
+      
+<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://fox-file.oss-cn-beijing.aliyuncs.com/pushurl.py" >pushurl.py</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+
+        <h2 id="参考资料"   >
+          <a href="#参考资料" class="heading-link"><i class="fas fa-link"></i></a>参考资料</h2>
+      
+<ul>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://cjh0613.com/20200602pythonBingUrlPush.html" >python主动推送链接至必应Bing平台</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ul>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://foolishfox.cn">liuyihui</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://foolishfox.cn/posts/202012-a.html">https://foolishfox.cn/posts/202012-a.html</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://foolishfox.cn/tags/%E6%94%B6%E5%BD%95/">收录</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="https://img.foolishfox.cn/images/static/alipay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="https://img.foolishfox.cn/images/static/wechat.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/202012-heog.html"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">从WordPress搬迁——使用Hexo搭建博客</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/202009-a.html"><span class="paginator-prev__text">星座与节气</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="waline-container"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">
+          流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96"><span class="toc-number">2.</span> <span class="toc-text">
+          依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E5%BD%95%E6%83%85%E5%86%B5"><span class="toc-number">3.</span> <span class="toc-text">
+          收录情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%99%E7%82%B9%E9%93%BE%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">
+          站点链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BE%E5%BA%A6%E6%8F%90%E4%BA%A4"><span class="toc-number">5.</span> <span class="toc-text">
+          百度提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%85%E5%BA%94%E6%8F%90%E4%BA%A4"><span class="toc-number">6.</span> <span class="toc-text">
+          必应提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8F%90%E4%BA%A4"><span class="toc-number">7.</span> <span class="toc-text">
+          自动提交</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0"><span class="toc-number">8.</span> <span class="toc-text">
+          更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81"><span class="toc-number">9.</span> <span class="toc-text">
+          源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">10.</span> <span class="toc-text">
+          参考资料</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://img.foolishfox.cn/images/static/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">Learing and Coding!</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/YiHui-Liu" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://space.bilibili.com/439545632" target="_blank" rel="noopener" data-popover="BiliBili" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">B</span></a><a class="sidebar-ov-social-item" href="https://www.zhihu.com/people/qing-jiu-44-72-51" target="_blank" rel="noopener" data-popover="知乎" data-popover-pos="up"><span class="sidebar-ov-social-item__icon">知</span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/7190631987" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="mailto:fox@foolishfox.cn" target="_blank" rel="noopener" data-popover="social.Email" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fas fa-envelope-open-text"></i></span></a></div><div class="sidebar-ov-feed"><span class="sidebar-ov-feed-rss"><a class="sidebar-ov-feed-rss__link" href="/atom.xml" target="_blank" rel="noopener"><span class="sidebar-ov-feed-rss__icon"><i class="fas fa-rss"></i></span><span>RSS 订阅</span></a></span></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2020~2021</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>liuyihui</span><span class="footer__devider">|</span><span>京ICP备2020033890号</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v5.2.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.5.0</span></div><div>本站由 <a target="_blank" rel="noopener" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral">又拍云</a> 提供加速服务 | <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=1278748401&web_id=1278748401"></script> <br /><span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/YiHui-Liu/Fox-Home-CDN/sitetime.js"></script></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.bootcss.com/velocity/1.5.2/velocity.min.js"></script><script src="https://cdn.bootcss.com/velocity/1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/gh/YiHui-Liu/Fox-Home-CDN/Waline.min.js"></script><script>function loadWaline () {
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var guest_info = 'nick,mail,link';
+
+  guest_info = guest_info.split(',').filter(function(item) {
+    return GUEST_INFO.indexOf(item) > -1;
+  });
+
+  new Waline({
+    el: '#waline-container',
+    serverURL: 'https://api.foolishfox.cn/waline',
+    placeholder: '您的评论将在审核后发布……',
+    pageSize: '' || 10,
+    lang: 'zh-CN,zh-TW,en' || 'zh-cn',
+    visitor: location.hostname!=='localhost' && true ,
+    avatar: 'wavatar',
+    path: location.pathname,
+    meta: guest_info
+  });
+}
+
+if (false) {
+  loadWaline();
+} else {
+  window.addEventListener('DOMContentLoaded', loadWaline, false);
+}</script><script src="/js/utils.js?v=2.5.0"></script><script src="/js/stun-boot.js?v=2.5.0"></script><script src="/js/scroll.js?v=2.5.0"></script><script src="/js/header.js?v=2.5.0"></script><script src="/js/sidebar.js?v=2.5.0"></script><script type="application/json" src="/search.json"></script></body></html>
