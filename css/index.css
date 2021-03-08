@@ -3053,17 +3053,11 @@ kbd {
   line-height: 0.5;
   font-size: 14px;
 }
+.v img {
+  display: inline;
+}
 @media (max-width: 991.98px) {
   .header-nav-menu-item__link {
     color: #2d2e30;
   }
-}
-input[type="checkbox"] {
-  margin-right: 10px;
-  width: 14px;
-  height: 14px;
-}
-input[type="checkbox"]:checked + label::before {
-  content: '\2713';
-  background-color: #808080;
 }
