@@ -60,11 +60,7 @@ $(document).ready(function () {
         var anchorDecode = window.decodeURIComponent(currHeading)
         $targetLink = $('.sidebar-toc a[href="#' + anchorDecode + '"]')
       }
-<<<<<<< Updated upstream
-
-=======
       
->>>>>>> Stashed changes
       $allTocItem.removeClass('active current')
       $targetLink.parents('li').addClass('active')
       $targetLink.parent().addClass('current')
