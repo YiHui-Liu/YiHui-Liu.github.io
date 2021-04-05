@@ -212,7 +212,6 @@ $(document).ready(function () {
 })
 
 //在特定日期变灰
-
 if(aidaori()){
   $("html").css({
       "filter":"gray !important",
@@ -223,10 +222,17 @@ if(aidaori()){
       "-ms-filter":"grayscale(100%)",
       "-o-filter":"grayscale(100%)" 
   });
+  $(".header-banner").css({
+      "background":"url(https://img.foolishfox.cn/images/static/qingming.jpeg) no-repeat center/cover"
+  });
+  $(".header-nav").css({
+      "background":"white"
+  })
 }
 
 function aidaori(){
-  var aidaoriarr=new Array("0404","0512","1213");
+  var aidaoriarr=new Array();
+  // var aidaoriarr=new Array("0404","0512","1213");
   //2020年4月4日 新冠肺炎哀悼日，清明节
   //2008年5月12日，四川汶川地震
   //1937年12月13日，南京大屠杀
