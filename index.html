@@ -53,7 +53,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <ul>
 <li>境外部署在<code>Github Pages</code>，访问地址为：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://yihui-liu.github.io" >https://yihui-liu.github.io</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
 <li>境内部署在<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.aliyun.com/1111/new?userCode=bwlcyen4" >阿里云</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>ECS上，使用又拍云CDN加速，访问地址为：<a href="https://foolishfox.cn">https://foolishfox.cn</a></li>
-</ul></div><div class="post-readmore"><a class="post-readmore__link" href="/posts/202012-b.html"><span class="post-readmore__text">阅读全文</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/posts/202103-move.html">博客服务器迁移过程</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-03-30</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.1k</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/posts/202103-move.html" data-flag-title="博客服务器迁移过程"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span></div></header><div class="post-body"><div class="post-excerpt"><div class="note-plugin info">
+</ul></div><div class="post-readmore"><a class="post-readmore__link" href="/posts/202012-b.html"><span class="post-readmore__text">阅读全文</span><span class="post-readmore__icon"><i class="fas fa-long-arrow-alt-right"></i></span></a></div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/posts/202103-move.html">博客服务器迁移过程</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2021-03-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2021-04-07</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.3k</span></span><span class="post-meta-item post-meta-item--visitors leancloud_visitors" id="/posts/202103-move.html" data-flag-title="博客服务器迁移过程"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value leancloud-visitors-count"></span></span></div></header><div class="post-body"><div class="post-excerpt"><div class="note-plugin info">
       <span class="note-plugin__icon note-plugin__icon--info">
               <i class="fas fa-info-circle"></i>
             </span>
@@ -453,7 +453,20 @@ if (false || false) {
     visitor: location.hostname!=='localhost' && true ,
     avatar: 'wavatar',
     path: location.pathname,
-    meta: guest_info
+    meta: guest_info,
+    uploadImage: function(file) {
+        const formData = new FormData();
+        formData.append('smfile', file);
+
+        return fetch('https://sm.ms/api/v2/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'multipart/form-data',
+            'Authorization' : 's8YaphcnJhSjJrjNQfVgeql1mKdUjVZb'
+          },
+          body: formData
+        }).then(resp => resp.json()).then(resp => resp.data.url);
+    }
   });
 }
 

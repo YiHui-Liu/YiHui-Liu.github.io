@@ -332,7 +332,20 @@ if (Array.isArray(assistSearchList)) {
     visitor: location.hostname!=='localhost' && true ,
     avatar: 'wavatar',
     path: location.pathname,
-    meta: guest_info
+    meta: guest_info,
+    uploadImage: function(file) {
+        const formData = new FormData();
+        formData.append('smfile', file);
+
+        return fetch('https://sm.ms/api/v2/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'multipart/form-data',
+            'Authorization' : 's8YaphcnJhSjJrjNQfVgeql1mKdUjVZb'
+          },
+          body: formData
+        }).then(resp => resp.json()).then(resp => resp.data.url);
+    }
   });
 }
 
