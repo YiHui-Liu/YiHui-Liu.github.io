@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://foolishfox.cn/tags/index.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/categories/index.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://foolishfox.cn/posts/202103-move.html</loc>
     
     <lastmod>2021-04-07</lastmod>
@@ -131,20 +145,6 @@
     <loc>https://foolishfox.cn/posts/202101-rosinstall.html</loc>
     
     <lastmod>2021-02-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/tags/index.html</loc>
-    
-    <lastmod>2020-12-13</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/categories/index.html</loc>
-    
-    <lastmod>2020-12-13</lastmod>
     
   </url>
   
