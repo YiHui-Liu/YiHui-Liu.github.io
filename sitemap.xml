@@ -2,6 +2,69 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://foolishfox.cn/posts/202103-move.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202104-waline.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202012-c.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202004-c.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202004-b.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202012-a.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202012-heog.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202101-a.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/posts/202101-rosinstall.html</loc>
+    
+    <lastmod>2021-04-07</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://foolishfox.cn/about/index.html</loc>
     
     <lastmod>2021-04-07</lastmod>
@@ -19,20 +82,6 @@
     <loc>https://foolishfox.cn/categories/index.html</loc>
     
     <lastmod>2021-04-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/posts/202103-move.html</loc>
-    
-    <lastmod>2021-04-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/posts/202012-a.html</loc>
-    
-    <lastmod>2021-03-15</lastmod>
     
   </url>
   
@@ -79,13 +128,6 @@
   </url>
   
   <url>
-    <loc>https://foolishfox.cn/posts/202101-a.html</loc>
-    
-    <lastmod>2021-02-27</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://foolishfox.cn/posts/202004-d.html</loc>
     
     <lastmod>2021-02-27</lastmod>
@@ -100,34 +142,6 @@
   </url>
   
   <url>
-    <loc>https://foolishfox.cn/posts/202004-c.html</loc>
-    
-    <lastmod>2021-02-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/posts/202004-b.html</loc>
-    
-    <lastmod>2021-02-27</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/posts/202012-heog.html</loc>
-    
-    <lastmod>2021-02-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/posts/202012-c.html</loc>
-    
-    <lastmod>2021-02-24</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://foolishfox.cn/posts/202009-a.html</loc>
     
     <lastmod>2021-02-24</lastmod>
@@ -136,13 +150,6 @@
   
   <url>
     <loc>https://foolishfox.cn/posts/202003-a.html</loc>
-    
-    <lastmod>2021-02-24</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/posts/202101-rosinstall.html</loc>
     
     <lastmod>2021-02-24</lastmod>
     
@@ -179,13 +186,6 @@
   </url>
   
   <url>
-    <loc>https://foolishfox.cn/tags/%E5%93%88%E5%8B%83%E5%B8%B8%E6%95%B0/</loc>
-    <lastmod>2021-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://foolishfox.cn/tags/%E5%AE%8B%E4%BB%A3/</loc>
     <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
@@ -207,21 +207,14 @@
   </url>
   
   <url>
-    <loc>https://foolishfox.cn/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/</loc>
+    <loc>https://foolishfox.cn/tags/Hexo/</loc>
     <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://foolishfox.cn/tags/%E8%B5%84%E6%9C%AC/</loc>
-    <lastmod>2021-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/tags/github/</loc>
+    <loc>https://foolishfox.cn/tags/%E9%A9%AC%E5%88%97%E6%AF%9B%E9%82%93/</loc>
     <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -258,21 +251,21 @@
   </url>
   
   <url>
-    <loc>https://foolishfox.cn/categories/ROS/</loc>
-    <lastmod>2021-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/categories/Windows/</loc>
-    <lastmod>2021-04-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://foolishfox.cn/categories/AE9-AP9-SPM/</loc>
+    <lastmod>2021-04-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/categories/%E6%9D%82%E7%B1%BB/</loc>
+    <lastmod>2021-04-07</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/categories/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
