@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://foolishfox.cn/posts/202104-conan.html</loc>
+    
+    <lastmod>2021-04-09</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://foolishfox.cn/posts/202103-move.html</loc>
     
     <lastmod>2021-04-07</lastmod>
@@ -158,7 +165,7 @@
 
   <url>
     <loc>https://foolishfox.cn/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -166,56 +173,56 @@
   
   <url>
     <loc>https://foolishfox.cn/tags/blog/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/%E8%BD%AF%E4%BB%B6/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/%E7%A7%91%E6%99%AE/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/%E5%AE%8B%E4%BB%A3/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/%E5%AE%89%E8%A3%85/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/%E6%94%B6%E5%BD%95/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/Hexo/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/tags/%E9%A9%AC%E5%88%97%E6%AF%9B%E9%82%93/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -224,49 +231,49 @@
   
   <url>
     <loc>https://foolishfox.cn/categories/Hexo/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/categories/%E5%8E%86%E5%8F%B2/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/categories/%E9%9A%8F%E8%AE%B0/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/categories/%E5%A4%A9%E6%96%87/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/categories/AE9-AP9-SPM/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/categories/%E6%9D%82%E7%B1%BB/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://foolishfox.cn/categories/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2021-04-07</lastmod>
+    <lastmod>2021-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
