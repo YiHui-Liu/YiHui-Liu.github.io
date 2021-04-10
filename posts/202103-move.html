@@ -497,6 +497,7 @@ if (Array.isArray(assistSearchList)) {
     avatar: 'wavatar',
     path: location.pathname,
     meta: guest_info,
+    avatarCDN: 'https://sdn.geekzu.org/avatar/',
     uploadImage: function(file) {
         const formData = new FormData();
         formData.append('smfile', file);
