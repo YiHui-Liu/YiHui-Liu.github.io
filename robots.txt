@@ -11,7 +11,8 @@ User-agent: Gigabot
 Disallow: /
 User-agent: *
 Disallow: 
-Disallow: /tags/
-Disallow: /categories/
-Disallow: /micro-blog
+Disallow: /tags
+Disallow: /categories
+Disallow: /s/reward
+Disallow: /s/gallery
 Sitemap: https://foolishfox.cn/sitemap.xml
