@@ -6,7 +6,7 @@
 <meta property="og:description" content="var vistors &#x3D; echarts.init(document.getElementById(&#39;vistors_container&#39;));     var posts   &#x3D; echarts.init(document.getElementById(&#39;posts_container&#39;));     var from   &#x3D; echarts.init(document.g">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-05T16:20:04.000Z">
-<meta property="article:modified_time" content="2021-04-14T09:54:16.738Z">
+<meta property="article:modified_time" content="2021-05-01T10:00:12.331Z">
 <meta property="article:author" content="liuyihui">
 <meta property="article:tag" content="foolishfox, blog, share">
 <meta name="twitter:card" content="summary"><title>统计 | Fox Home</title><link ref="canonical" href="https://foolishfox.cn/s/statistics/index.html"><link rel="alternate" href="/atom.xml" type="application/atom+xml"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.6.2"><link rel="dns-prefetch" href="https://hm.baidu.com"><script>var _hmt = _hmt || [];
@@ -62,11 +62,20 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
         if (request.status != 200) { return "";}
         var visitData = JSON.parse(request.responseText);
         var base = new Date(), date = [];
-        var total_data = visitData.total;
         var dyear = base.getFullYear(), dmonth = base.getMonth()+1;
         var year = 2020, month = 4, k = 0;
         
-        while ( year<dyear || (year==dyear && month<=dmonth ) ) {
+       var total_data = [];
+        for( index in visitData.vistors )
+        {
+            let year_vis = visitData.vistors[index];
+            for( vnum in year_vis)
+            {
+                if( year_vis[vnum]==="" )   continue;
+                total_data.push(year_vis[vnum]);
+            }
+        }
+        while ( k<total_data.length ) {
             date.push([year, month].join('/'));
             if( k>0 )   total_data[k] += total_data[k-1];
             month += 1, k+=1 ;
@@ -127,10 +136,11 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
         var link   = getSum(visitData.from.link.data);
         var travel = getSum(visitData.from.link.travellings)+getSum(visitData.from.link.foreverblog);
         var github = getSum(visitData.from.link.github);
-        var others = link - travel - github;
         var baidu  = getSum(visitData.from.search.baidu);
         var bing   = getSum(visitData.from.search.bing);
         var google = getSum(visitData.from.search.google);
+              link = link - bing;
+        var others = link - travel - github;
         var search = baidu + bing + google;
         var from_option = {
             title: { text: '访问来源', subtext: '自2020.04.04起' },
