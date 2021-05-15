@@ -3174,3 +3174,6 @@ figure.gallery-group .gallery-group-name:after {
   width: auto;
   text-align: inherit;
 }
+.footnote-item {
+  line-height: 150%;
+}
