@@ -2,7 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://foolishfox.cn/s/about/index.html</loc>
+    <loc>https://foolishfox.cn/s/statistics/data/calendar.json</loc>
+    
+    <lastmod>2021-05-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/s/statistics/data/link.json</loc>
+    
+    <lastmod>2021-05-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/s/statistics/data/engine.json</loc>
+    
+    <lastmod>2021-05-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/s/statistics/data/sources.json</loc>
+    
+    <lastmod>2021-05-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/s/statistics/data/trends.json</loc>
+    
+    <lastmod>2021-05-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/s/statistics/data/map.json</loc>
     
     <lastmod>2021-05-18</lastmod>
     
@@ -11,7 +46,14 @@
   <url>
     <loc>https://foolishfox.cn/s/lab/lab.json</loc>
     
-    <lastmod>2021-05-17</lastmod>
+    <lastmod>2021-05-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://foolishfox.cn/s/about/index.html</loc>
+    
+    <lastmod>2021-05-18</lastmod>
     
   </url>
   
@@ -131,13 +173,6 @@
     <loc>https://foolishfox.cn/posts/202101-a.html</loc>
     
     <lastmod>2021-05-14</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://foolishfox.cn/s/statistics/vistor.json</loc>
-    
-    <lastmod>2021-05-01</lastmod>
     
   </url>
   
