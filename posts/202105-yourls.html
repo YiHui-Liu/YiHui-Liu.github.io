@@ -515,36 +515,44 @@ if (Array.isArray(assistSearchList)) {
     }, false);
   });
 }</script><script src="https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script><script>function loadWaline () {
-  var GUEST_INFO = ['nick', 'mail', 'link'];
-  var guest_info = 'nick,mail,link';
+  var META = ['nick', 'mail', 'link'];
+  var need_meta = 'nick,mail,link';
+  var require_meta = 'nick,mail';
 
-  guest_info = guest_info.split(',').filter(function(item) {
-    return GUEST_INFO.indexOf(item) > -1;
+  need_meta = need_meta.split(',').filter(function(item) {
+    return META.indexOf(item) > -1;
+  });
+
+  require_meta = require_meta.split(',').filter(function(item) {
+    return META.indexOf(item) > -1;
   });
 
   new Waline({
     el: '#waline-container',
     serverURL: 'https://api.foolishfox.cn/waline',
-    placeholder: '您的评论将在审核后发布……',
+    wordLimit: 0,
+    path: location.pathname,
+    avatar: 'wavatar',
+    meta: need_meta,
     pageSize: '' || 10,
     lang: 'zh-CN,zh-TW,en' || 'zh-cn',
     visitor: location.hostname!=='localhost' && true ,
-    avatar: 'wavatar',
-    path: location.pathname,
-    meta: guest_info,
-    avatarCDN: 'https://sdn.geekzu.org/avatar/',
+    requiredMeta: require_meta,
     uploadImage: function(file) {
-        const formData = new FormData();
-        formData.append('smfile', file);
-
-        return fetch('https://sm.ms/api/v2/upload', {
-          method: 'POST',
-          headers: {
-            'Content-Type' : 'multipart/form-data',
-            'Authorization' : 's8YaphcnJhSjJrjNQfVgeql1mKdUjVZb'
-          },
-          body: formData
-        }).then(resp => resp.json()).then(resp => resp.data.url);
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      return fetch('https://7bu.top/api/upload', {
+        method: 'POST',
+        headers: {
+          'token': 'e8d5dcf6c091c20029c02070c011bd69'
+        },
+        body: formData
+      }).then(resp => resp.json()).then(resp => resp.data.url);
+    },
+    locale: {
+      admin: 'FF',
+      placeholder: '您的评论将在审核后发布……支持剪切板图片上传'
     }
   });
 }

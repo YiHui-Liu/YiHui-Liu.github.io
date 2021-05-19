@@ -4,7 +4,7 @@ var metricsName = (metrics === 'pv_count' ? '访问次数' : (metrics === 'visit
 // 访问地图
 function mapChart () {
     let script = document.createElement("script")
-    fetch('./data/map.json?date'+new Date()).then(data => data.json()).then(data => {
+    fetch('https://api.foolishfox.cn/data/map.json?date'+new Date()).then(data => data.json()).then(data => {
         let mapName = data.result.items[0]
         let mapValue = data.result.items[1]
         let mapArr = []
@@ -65,7 +65,7 @@ function get_month(s) {
 // 访问趋势
 function trendsChart () {
     let script = document.createElement("script")
-    fetch('./data/trends.json?date'+new Date()).then(data => data.json()).then(data => {
+    fetch('https://api.foolishfox.cn/data/trends.json?date'+new Date()).then(data => data.json()).then(data => {
         let date = new Date();
         let monthValueArr = {};
         let monthName = data.result.items[0];
@@ -116,7 +116,7 @@ function sourcesChart () {
     let script = document.createElement("script");
     var innerHTML = '';
     var link = 0, direct = 0, search = 0;
-    fetch('./data/sources.json?date'+new Date()).then(data => data.json()).then(data => {
+    fetch('https://api.foolishfox.cn/data/sources.json?date'+new Date()).then(data => data.json()).then(data => {
         let sourcesName = data.result.items[0];
         let sourcesValue = data.result.items[1];
         let sourcesArr = [];
@@ -153,7 +153,7 @@ function sourcesChart () {
     }).catch(function (error) {
         console.log(error);
     });
-    fetch('./data/engine.json?date'+new Date()).then(data => data.json()).then(data => {
+    fetch('https://api.foolishfox.cn/data/engine.json?date'+new Date()).then(data => data.json()).then(data => {
         let enginesName = data.result.items[0];
         let enginesValue = data.result.items[1];
         let enginesArr = [];
@@ -165,7 +165,7 @@ function sourcesChart () {
     }).catch(function (error) {
         console.log(error);
     });
-    fetch('./data/link.json?date'+new Date()).then(data => data.json()).then(data => {
+    fetch('https://api.foolishfox.cn/data/link.json?date'+new Date()).then(data => data.json()).then(data => {
         let linksName = data.result.items[0];
         let linksValue = data.result.items[1];
         let linksArr = {};
@@ -189,7 +189,7 @@ function sourcesChart () {
                     labelLine: { show: false },
                     data: [
                         {value: ${search+bing}, name: '搜索', itemStyle: { color : 'green' }},
-                        {value: ${direct}, name: '直达'},
+                        {value: ${direct}, name: '直达', itemStyle: { color : '#FFDB5C' }},
                         {value: ${link-bing}, name: '外链', itemStyle: { color : '#32C5E9' }}
                     ]
                 },

@@ -188,7 +188,7 @@ var visit_calendar = (metrics, visit_color) => {
       return newArr
     }
   
-    fetch('./data/calendar.json?date'+new Date()).then(data => data.json()).then(res => {
+    fetch('https://api.foolishfox.cn/data/calendar.json?date'+new Date()).then(data => data.json()).then(res => {
       var date_arr = res.result.items[0];
       var value_arr = res.result.items[1];
       var total = 0;
