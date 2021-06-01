@@ -388,14 +388,20 @@ if (Array.isArray(assistSearchList)) {
   new Waline({
     el: '#waline-container',
     serverURL: 'https://api.foolishfox.cn/waline',
+    visitor: location.hostname!=='localhost' && true ,
+    emoji: [
+      'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/weibo',
+      'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
+      'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/qq',
+    ],
     wordLimit: 0,
     path: location.pathname,
     avatar: 'wavatar',
     meta: need_meta,
     pageSize: '' || 10,
     lang: 'zh-CN,zh-TW,en' || 'zh-cn',
-    visitor: location.hostname!=='localhost' && true ,
     requiredMeta: require_meta,
+    avatarCDN: 'https://sdn.geekzu.org/avatar/',
     uploadImage: function(file) {
       const formData = new FormData();
       formData.append('image', file);
