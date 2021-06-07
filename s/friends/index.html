@@ -645,7 +645,6 @@ if (Array.isArray(assistSearchList)) {
     pageSize: '' || 10,
     lang: 'zh-CN,zh-TW,en' || 'zh-cn',
     requiredMeta: require_meta,
-    avatarCDN: 'https://sdn.geekzu.org/avatar/',
     uploadImage: function(file) {
       const formData = new FormData();
       formData.append('image', file);
@@ -660,6 +659,7 @@ if (Array.isArray(assistSearchList)) {
     },
     locale: {
       admin: 'FF',
+      friend: '小伙伴',
       placeholder: '您的评论将在审核后发布……支持剪切板图片上传'
     }
   });
