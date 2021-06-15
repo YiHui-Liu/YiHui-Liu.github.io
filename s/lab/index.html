@@ -1,12 +1,11 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="preload" href="/css/index.css?v=2.6.2" as="style"><link rel="preload" href="https://img.foolishfox.cn/images/static/background.jpg" as="image"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_small.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_big.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="评论Waline 评论后台                旅行旅行地图                打赏感谢dl的慷慨                服务监控咦，我的图床怎么又挂了                节点状态完了，服务器又超负载了                短链接FF的短链接生成器">
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="preload" href="/css/index.css?v=2.6.2" as="style"><link rel="preload" href="https://img.foolishfox.cn/images/static/background.jpg" as="image"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_small.jpg?v=2.6.2" type="image/png" sizes="16x16"><link rel="icon" href="https://img.foolishfox.cn/images/static/fox_big.jpg?v=2.6.2" type="image/png" sizes="32x32"><meta name="description" content="评论Waline 评论后台                打赏感谢dl的慷慨                服务监控咦，我的图床怎么又挂了                节点状态完了，服务器又超负载了                短链接FF的短链接生成器">
 <meta property="og:type" content="website">
 <meta property="og:title" content="实验室">
 <meta property="og:url" content="https://foolishfox.cn/s/lab/index.html">
 <meta property="og:site_name" content="Fox Home">
-<meta property="og:description" content="评论Waline 评论后台                旅行旅行地图                打赏感谢dl的慷慨                服务监控咦，我的图床怎么又挂了                节点状态完了，服务器又超负载了                短链接FF的短链接生成器">
+<meta property="og:description" content="评论Waline 评论后台                打赏感谢dl的慷慨                服务监控咦，我的图床怎么又挂了                节点状态完了，服务器又超负载了                短链接FF的短链接生成器">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://waline.js.org/logo.png">
-<meta property="og:image" content="https://img.foolishfox.cn/images/static/fox_big.jpg">
 <meta property="og:image" content="https://img.foolishfox.cn/images/static/fox_big.jpg">
 <meta property="og:image" content="https://uptimerobot.com/favicon.ico">
 <meta property="og:image" content="https://node.foolishfox.cn/favicon.ico">
@@ -55,10 +54,7 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.4.0"></he
 <div class="friends-plugin"><a class="friends-plugin__item" target="_blank" rel="noopener" href="https://api.foolishfox.cn/waline/ui">
         <img  class="friends-plugin__item-avatar lazyload lazyload-gif"  class="lazyload lazyload-gif"
           src="/images/loading.svg" data-src="https://waline.js.org/logo.png"  data-zoom="none">
-      <div class="friends-plugin__item-info"><p class="friends-plugin__item-info__name" title="评论">评论</p><p class="friends-plugin__item-info__intro" title="Waline 评论后台">Waline 评论后台</p></div></a><a class="friends-plugin__item" target="_blank" rel="noopener" href="https://api.foolishfox.cn/travel/">
-        <img  class="friends-plugin__item-avatar lazyload lazyload-gif"  class="lazyload lazyload-gif"
-          src="/images/loading.svg" data-src="https://img.foolishfox.cn/images/static/fox_big.jpg"  data-zoom="none">
-      <div class="friends-plugin__item-info"><p class="friends-plugin__item-info__name" title="旅行">旅行</p><p class="friends-plugin__item-info__intro" title="旅行地图">旅行地图</p></div></a><a class="friends-plugin__item" href="/s/reward/">
+      <div class="friends-plugin__item-info"><p class="friends-plugin__item-info__name" title="评论">评论</p><p class="friends-plugin__item-info__intro" title="Waline 评论后台">Waline 评论后台</p></div></a><a class="friends-plugin__item" href="/s/reward/">
         <img  class="friends-plugin__item-avatar lazyload lazyload-gif"  class="lazyload lazyload-gif"
           src="/images/loading.svg" data-src="https://img.foolishfox.cn/images/static/fox_big.jpg"  data-zoom="none">
       <div class="friends-plugin__item-info"><p class="friends-plugin__item-info__name" title="打赏">打赏</p><p class="friends-plugin__item-info__intro" title="感谢dl的慷慨">感谢dl的慷慨</p></div></a><a class="friends-plugin__item" target="_blank" rel="noopener" href="https://status.foolishfox.cn/">
@@ -358,7 +354,7 @@ if (Array.isArray(assistSearchList)) {
 
   new Waline({
     el: '#waline-container',
-    serverURL: 'https://api.foolishfox.cn/waline',
+    serverURL: 'https://waline.foolishfox.cn/',
     visitor: location.hostname!=='localhost' && true ,
     emoji: [
       'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
