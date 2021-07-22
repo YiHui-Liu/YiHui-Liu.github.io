@@ -356,7 +356,7 @@ if (Array.isArray(assistSearchList)) {
 
   new Waline({
     el: '#waline-container',
-    serverURL: 'https://waline.foolishfox.cn/',
+    serverURL: 'https://waline.foolishfox.cn',
     visitor: location.hostname!=='localhost' && true ,
     emoji: [
       'https://cdn.jsdelivr.net/gh/walinejs/emojis@1.0.0/bilibili',
@@ -394,4 +394,15 @@ if (false) {
   loadWaline();
 } else {
   window.addEventListener('DOMContentLoaded', loadWaline, false);
-}</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
+}
+
+window.addEventListener('load', () => {
+  Waline.Widget.RecentComments({
+    serverURL: 'https://waline.foolishfox.cn',
+    count: 3,
+  }).then(({ comments }) => {
+    document.getElementById('newest-comments-list').innerHTML = comments.map(
+      (comment) => `<div class="newest-item"><a href="${comment.url}" class="newest-item-avatar"><img src="https://sdn.geekzu.org/avatar/${comment.mail}?s=70" /></a><div class="newest-item-content"><span class="newest-item-content-comment">${comment.comment}</span><div class="newest-item-content-info"><span><a href=${comment.link ? comment.link : '/'}>${comment.nick}</a> / ${comment.insertedAt.substring(0, 10)}</span></div></div></div>`
+    ).join('');
+  });
+});</script><script src="/js/utils.js?v=2.6.2"></script><script src="/js/stun-boot.js?v=2.6.2"></script><script src="/js/scroll.js?v=2.6.2"></script><script src="/js/header.js?v=2.6.2"></script><script src="/js/sidebar.js?v=2.6.2"></script><script type="application/json" src="/search.json"></script></body></html>
